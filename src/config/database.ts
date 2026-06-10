@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Prisma client event typing for "error" can be narrow in some envs; use any to avoid build-time type errors
-prisma.$on('error' as any, (event: any) => {
+(prisma as any).$on('error', (event: any) => {
   logger.error('Prisma error', { message: event?.message, target: event?.target });
 });
 
