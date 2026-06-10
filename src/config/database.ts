@@ -19,8 +19,9 @@ if (process.env.NODE_ENV !== 'production') {
   globalForPrisma.__prisma = prisma;
 }
 
-prisma.$on('error', (event: { message: string; target?: string }) => {
-  logger.error('Prisma error', { message: event.message, target: event.target });
+// Prisma client event typing for "error" can be narrow in some envs; use any to avoid build-time type errors
+prisma.$on('error' as any, (event: any) => {
+  logger.error('Prisma error', { message: event?.message, target: event?.target });
 });
 
 export async function connectDatabase(): Promise<void> {
