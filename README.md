@@ -126,6 +126,18 @@ Suggested Render flow:
 5. Build command: `npm ci && npm run build && npx prisma migrate deploy && npx prisma generate`
 6. Start command: `node dist/server.js`
 
+### Live Deployment
+
+The project is deployed at: https://hintro-backend-8lq3.onrender.com
+
+Quick smoke-test (PowerShell):
+```powershell
+$APP='https://hintro-backend-8lq3.onrender.com'
+$res = Invoke-RestMethod -Method POST -Uri $APP/api/auth/login -ContentType 'application/json' -Body '{"email":"demo@hintro.com","password":"TestPassword123"}'
+$token = $res.data.token
+Invoke-RestMethod -Method POST -Uri $APP/api/meetings -Headers @{ Authorization = "Bearer $token" } -ContentType 'application/json' -Body '{"title":"Smoke","participants":["a@b.com"],"meetingDate":"2026-05-20T10:00:00Z","transcript":[{"timestamp":"00:10","speaker":"John","text":"This is test transcript"}]}'
+```
+
 ## Testing
 
 ```bash
