@@ -13,7 +13,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "include": ["src/**/*", "server.ts", "prisma/seed.ts", "jest.config.ts"],
   "exclude": ["node_modules", "dist"]
